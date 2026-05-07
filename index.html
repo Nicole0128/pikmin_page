@@ -1014,17 +1014,24 @@
       position: relative;
     }
 
-    .opening-visual::after {
-      content: "images/opening-night-street.png";
+
+
+    .opening-visual-img {
       position: absolute;
-      left: 18px;
-      bottom: 18px;
-      color: #496344;
-      font-size: 12px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.74);
-      backdrop-filter: blur(8px);
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      z-index: 0;
+    }
+
+    .opening-visual-img.is-missing {
+      display: none;
+    }
+    .opening-visual::after {
+      display: none;
     }
 
     .story-shell {
@@ -1262,175 +1269,6 @@
     .vn-options { display: grid; gap: 10px; margin-top: 14px; }
     .vn-scene.completed .vn-options { display: none; }
 
-    .article-card,
-    .interactive-card,
-    .review-card,
-    .diary-card,
-    .ending-card {
-      background: var(--story-card);
-      border: 1px solid rgba(122,201,67,.20);
-      border-radius: 30px;
-      box-shadow: 0 18px 42px rgba(92,120,84,.12);
-      padding: clamp(22px, 4vw, 42px);
-      backdrop-filter: blur(8px);
-    }
-    .article-card,
-    .chat-card,
-    .group-chat-card,
-    .interactive-card {
-      width: 100%;
-      max-width: 860px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .article-card { max-width: 860px; margin: 0 auto; }
-    .article-card h2 { color: #2b402a; margin-bottom: 18px; font-size: clamp(28px, 4vw, 42px); }
-    .article-card h3 { color: #345E31; margin: 28px 0 14px; font-size: clamp(22px, 3vw, 30px); line-height: 1.35; }
-    .article-content { max-width: 760px; margin: 0 auto; color: var(--story-text); }
-    .article-content p { font-size: 17px; line-height: 2; margin: 0 0 1.15em; }
-    .article-note { color: var(--story-text-soft); font-size: 15px !important; background: #F2FFD9; border-left: 4px solid var(--pikmin-green); padding: 10px 14px; border-radius: 0 14px 14px 0; }
-    blockquote { margin: 22px 0; padding: 18px 22px; border-left: 5px solid var(--pikmin-yellow); background: #FFF8E7; border-radius: 0 18px 18px 0; font-size: 18px; line-height: 1.9; color: #4B673D; font-weight: 800; }
-    .article-app-notification {
-      display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 14px;
-      align-items: start;
-      margin: 24px 0 28px;
-      padding: 14px;
-      border-radius: 24px;
-      background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(238,247,255,.92));
-      border: 1px solid rgba(110,198,255,.22);
-      box-shadow: 0 16px 34px rgba(92,120,84,.10);
-      animation: notifyDrop .72s cubic-bezier(.22,.68,0,1.08) both;
-    }
-    .article-app-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      overflow: hidden;
-      background: linear-gradient(135deg, #F1FFD6, #BDEBFF);
-    }
-    .article-app-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .article-notification-meta {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      color: #718096;
-      font-weight: 800;
-      margin-bottom: 5px;
-    }
-    .article-notification-title {
-      font-weight: 900;
-      color: #1f2937;
-      line-height: 1.5;
-    }
-    .article-notification-body {
-      margin-top: 4px;
-      color: #4b5563;
-      line-height: 1.65;
-      font-weight: 600;
-    }
-
-    .section-head { text-align: center; max-width: 760px; margin: 0 auto 28px; }
-    .section-head h2 { color: #2b402a; }
-    .section-head p { color: var(--story-text-soft); line-height: 1.9; }
-
-    .flip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .compare-card-wrap { position: relative; padding-top: 90px; }
-    .compare-holder-pikmin { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; z-index: 2; pointer-events: none; animation: none; }
-    .flip-card { position: relative; z-index: 1; min-height: 330px; perspective: 1100px; cursor: pointer; }
-    .flip-inner { position: relative; width: 100%; height: 100%; min-height: 330px; transition: transform .72s cubic-bezier(.22,.68,0,1.05); transform-style: preserve-3d; }
-    .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
-    .flip-face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 30px; background: rgba(255,255,255,.94); border: 1px solid rgba(122,201,67,.22); padding: 24px; box-shadow: 0 16px 34px rgba(92,120,84,.12); display: flex; flex-direction: column; justify-content: center; overflow: hidden; text-align: center; }
-    .flip-front::before { content: ""; position: absolute; inset: 0; background: var(--game-bg, none) center / cover no-repeat; opacity: .16; z-index: 0; }
-    .flip-face > * { position: relative; z-index: 1; }
-    .flip-back { transform: rotateY(180deg); text-align: left; color: #fff; }
-    .flip-back.ingress { background: linear-gradient(135deg, #EAF7FF, #DFF4F6); color: #1F4E5A; }
-    .flip-back.ingress h3 { color: #16788A; }
-    .flip-back.pokemon { background: linear-gradient(135deg, #EAF6FF, #D7ECFF); color: #24496B; }
-    .flip-back.pikmin { background: linear-gradient(135deg, #F1FFD6, #FFF8C7); color: #2D4B24; }
-    .flip-back ul { background: rgba(255,255,255,.72); color: inherit; border: 1px solid rgba(255,255,255,.55); border-radius: 20px; padding: 18px 18px 18px 34px; margin: 10px 0 0; }
-    .game-front-image {
-      padding: 0;
-      background: #fff;
-    }
-    .game-front-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .flip-face h3 { font-size: 26px; margin-bottom: 8px; }
-    .flip-face p, .flip-face li { line-height: 1.75; }
-    .game-icon-slot { width: 92px; height: 92px; margin: 0 auto 14px; border-radius: 26px; background: rgba(255,255,255,.76); display: grid; place-items: center; border: 1px dashed rgba(122,201,67,.35); }
-    .game-icon-slot img { width: 74%; height: 74%; object-fit: contain; }
-
-    .players-discussion-wrap { display: grid; gap: 24px; }
-    .players-vn { min-height: 520px; width: 100%; padding: 24px 0; }
-    .players-vn .vn-bg { inset: 0; }
-    .players-vn .vn-character-wrap { min-height: 330px; }
-    .interview-quote { margin: 0 0 14px; padding: 14px 16px; border-radius: 18px; background: rgba(255,255,255,.76); border-left: 4px solid var(--pikmin-blue); line-height: 1.8; color: var(--story-text-soft); }
-
-    .ending-card { text-align: center; max-width: 840px; margin: 0 auto; }
-    .ending-video-wrap { margin: 22px auto 0; max-width: 560px; aspect-ratio: 16 / 9; border-radius: 28px; overflow: hidden; background: linear-gradient(135deg, #BDEBFF, #FFF8E7); border: 1px dashed rgba(122,201,67,.35); display: grid; place-items: center; color: var(--story-text-soft); }
-    #ending-video { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .ending-placeholder { padding: 20px; line-height: 1.8; }
-
-    .gift-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 22px; align-items: center; }
-    .heart-row { display: flex; gap: 8px; font-size: 34px; margin: 12px 0 20px; }
-    .heart-row span { filter: grayscale(1); opacity: .28; transform: scale(.9); transition: .4s ease; }
-    .heart-row span.filled { filter: none; opacity: 1; transform: scale(1); }
-    .gift-pikmin-img { max-width: 210px; margin: 0 auto; display: block; }
-    .gift-visuals { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 16px; }
-    .gift-small-img { width: 100%; min-height: 96px; background: rgba(255,255,255,.58); border-radius: 20px; }
-    #postcard-img,
-    .gift-postcard-img {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      height: auto;
-      object-fit: cover;
-      border-radius: 22px;
-      background: #fff;
-      border: 1px solid rgba(122,201,67,.24);
-    }
-    .gift-items { display: grid; gap: 12px; }
-    .gift-item { padding: 14px 16px; border-radius: 18px; background: rgba(255,255,255,.78); border: 1px solid rgba(122,201,67,.18); color: var(--story-text-soft); }
-    .gift-item strong { color: var(--story-text); }
-    .gift-item.is-hidden, .gift-small-img.is-hidden, .gift-pikmin-img.is-hidden { display: none; }
-
-    .mood-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .mood-card { text-align: center; padding: 18px; }
-    .mood-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: contain; border-radius: 18px; background: #F1FFD6; margin-bottom: 12px; }
-    .mood-card h3 { font-size: 22px; margin-bottom: 8px; }
-    .mood-card p { color: var(--story-text-soft); line-height: 1.8; margin: 0; }
-    .mood-response { margin-top: 18px; display: none; }
-    .mood-response.show { display: block; }
-
-    .diary-input { width: 100%; min-height: 150px; border: 1px solid rgba(122,201,67,.26); border-radius: 22px; padding: 16px; font: inherit; line-height: 1.8; resize: vertical; background: rgba(255,255,255,.86); color: var(--story-text); margin: 10px 0 14px; }
-    .diary-output { display: none; margin-top: 22px; border-radius: 28px; padding: 24px; background: linear-gradient(160deg, #fff, #FFF8E7); border: 1px solid rgba(122,201,67,.22); box-shadow: 0 18px 38px rgba(92,120,84,.12); line-height: 1.9; }
-    .diary-output.show { display: block; animation: softAppear .55s ease both; }
-    .diary-meta { color: var(--story-text-soft); font-size: 13px; margin-bottom: 12px; }
-
-    .img-placeholder { background: linear-gradient(135deg, rgba(255,255,255,.72), rgba(168,216,91,.35)); border: 1px dashed rgba(122,201,67,.34); border-radius: 22px; display: grid; place-items: center; color: var(--story-text-soft); font-size: 12px; text-align: center; padding: 12px; }
-    .quiz-wrap { padding: 28px 16px 80px; }
-
-    @media (max-width: 860px) {
-      .opening-inner, .vn-scene, .gift-grid { grid-template-columns: 1fr; }
-      .opening-copy { padding: 10px 0; }
-      .opening-visual { aspect-ratio: 16 / 9; }
-      .vn-scene { min-height: auto; padding: 36px 0; }
-      .vn-bg { inset: 16px 0; }
-      .vn-character-wrap { min-height: auto; }
-      .vn-character { max-width: 180px; }
-      .flip-grid, .mood-grid, .gift-visuals { grid-template-columns: 1fr; }
-      .phone-content { min-height: calc(100svh - 120px); }
-      .compare-card-wrap { padding-top: 82px; }
-      .compare-holder-pikmin { width: 108px; }
-    }
-
     @media (max-width: 520px) {
       .opening-scene, .phone-notification-scene { padding: 16px; }
       .opening-copy h1 {
@@ -1620,22 +1458,6 @@
     .member-chip { font-size: 11px; padding: 4px 8px; border-radius: 999px; background: rgba(255,255,255,.7); border: 1px solid rgba(122,201,67,.18); color: #496344; font-weight: 800; }
 
     .is-hidden { display: none !important; }
-    #ending-animation-section .ending-card { position: relative; }
-    .ending-actions { margin-top: 20px; display: flex; justify-content: center; }
-    .gift-reveal-card { animation: softAppear .55s ease both; }
-    #gift-img.reveal-wearing { animation: softAppear .8s ease both, floatPikmin 3s ease-in-out infinite; }
-
-    .diary-share-card {
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 20px;
-      margin-top: 22px;
-      padding: 22px;
-      border-radius: 30px;
-      background: linear-gradient(135deg, #FFF8E7, #F1FFD6 54%, #EAF7FF);
-      border: 1px solid rgba(122,201,67,.24);
-      box-shadow: 0 18px 42px rgba(92,120,84,.12);
-    }
     .diary-share-left { display: grid; align-content: start; gap: 10px; }
     .diary-share-left h3 { font-size: clamp(24px, 3vw, 34px); color: #2D4B24; }
     .diary-share-meta { color: var(--story-text-soft); font-size: 14px; line-height: 1.8; }
@@ -1650,6 +1472,1719 @@
       .diary-action-row .btn { width: 100%; }
     }
 
+
+    /* ========== readable story rhythm revision ========== */
+    .story-section {
+      padding: clamp(54px, 8vw, 104px) 0;
+    }
+
+    .pikmin-companion-section {
+      padding-top: 16px;
+      padding-bottom: 24px;
+    }
+
+    .article-card {
+      max-width: 900px;
+      border-radius: 30px;
+    }
+
+    .article-content {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .article-content p {
+      font-size: 17px;
+      line-height: 1.9;
+      margin: 0 0 1.45em;
+      letter-spacing: 0.01em;
+    }
+
+    .article-card h2 {
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 28px;
+      line-height: 1.35;
+    }
+
+    .article-card h3 {
+      max-width: 720px;
+      margin: 44px auto 18px;
+    }
+
+    .reading-mode-toggle {
+      position: sticky;
+      top: 14px;
+      z-index: 30;
+      display: block;
+      margin: 18px auto 0;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(122,201,67,.28);
+      background: rgba(255,255,255,.9);
+      color: #2D4B24;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(92,120,84,.12);
+      backdrop-filter: blur(10px);
+    }
+
+    .reading-mode-toggle:hover {
+      background: #F2FFD9;
+    }
+
+    body.reading-mode .pikmin-companion,
+    body.reading-mode .pikmin-hint-card,
+    body.reading-mode .floating-pikmin {
+      display: none !important;
+    }
+
+    .pikmin-hint-card {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 14px;
+      align-items: center;
+      max-width: 760px;
+      margin: 34px auto 0;
+      padding: 16px 18px;
+      border-radius: 22px;
+      background: rgba(255, 248, 231, 0.82);
+      border: 1px solid rgba(122, 201, 67, 0.24);
+      box-shadow: 0 12px 26px rgba(92, 120, 84, 0.08);
+    }
+
+    .pikmin-hint-card img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,.08));
+    }
+
+    .pikmin-hint-card p {
+      margin: 0;
+      font-size: 14.5px;
+      line-height: 1.8;
+      color: var(--story-text-soft);
+    }
+
+    .pikmin-hint-card strong {
+      color: #2D4B24;
+    }
+
+    .news-tool {
+      max-width: 920px;
+      margin: 42px auto;
+    }
+
+    .tool-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 24px;
+    }
+
+    .tool-kicker {
+      display: inline-flex;
+      margin-bottom: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #F1FFD6;
+      color: #4f7e4f;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .tool-header h3 {
+      font-family: "Noto Serif TC", serif;
+      font-size: clamp(24px, 3vw, 34px);
+      margin: 0 0 10px;
+      color: #2b402a;
+    }
+
+    .tool-header p {
+      margin: 0;
+      color: var(--story-text-soft);
+      line-height: 1.85;
+    }
+
+    .mechanics-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .mechanic-card,
+    .impact-card,
+    .timeline-item,
+    .glossary-grid details {
+      background: rgba(255,255,255,.9);
+      border: 1px solid rgba(122,201,67,.22);
+      box-shadow: 0 12px 26px rgba(92,120,84,.08);
+    }
+
+    .mechanic-card {
+      padding: 18px;
+      border-radius: 22px;
+    }
+
+    .mechanic-card h4 {
+      font-family: "Noto Serif TC", serif;
+      font-size: 17px;
+      margin-bottom: 8px;
+      color: #2D4B24;
+    }
+
+    .mechanic-card p,
+    .impact-card p,
+    .timeline-item p,
+    .glossary-grid p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--story-text-soft);
+    }
+
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .glossary-grid details {
+      padding: 16px;
+      border-radius: 20px;
+    }
+
+    .glossary-grid summary {
+      cursor: pointer;
+      font-weight: 900;
+      color: #2D4B24;
+    }
+
+    .glossary-grid p {
+      margin-top: 10px;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 18px;
+      border-radius: 22px;
+    }
+
+    .timeline-item time {
+      display: block;
+      margin-bottom: 8px;
+      color: #4f7e4f;
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    .daily-review-tool {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 24px;
+      align-items: center;
+      padding: 24px;
+      border-radius: 30px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(122,201,67,.22);
+      box-shadow: 0 16px 34px rgba(92,120,84,.1);
+    }
+
+    .daily-phone-frame {
+      max-width: 280px;
+      margin: 0 auto;
+      padding: 18px;
+      border-radius: 34px;
+      border: 8px solid #172033;
+      background: linear-gradient(180deg, #EAF7FF, #FFF8E7);
+    }
+
+    .daily-phone-title {
+      text-align: center;
+      font-weight: 900;
+      color: #2D4B24;
+      margin-bottom: 14px;
+    }
+
+    .daily-stat {
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      border-radius: 22px;
+      background: #fff;
+      margin-bottom: 12px;
+    }
+
+    .daily-stat strong {
+      font-size: 36px;
+      color: #2D4B24;
+    }
+
+    .daily-stat span {
+      font-size: 13px;
+      color: var(--story-text-soft);
+    }
+
+    .daily-map {
+      height: 120px;
+      display: grid;
+      place-items: center;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #F1FFD6, #BDEBFF);
+      color: #496344;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .daily-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .daily-list div {
+      padding: 9px 10px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.78);
+      font-size: 13px;
+      color: var(--story-text-soft);
+    }
+
+    .daily-review-copy h3 {
+      font-family: "Noto Serif TC", serif;
+      font-size: clamp(24px, 3vw, 34px);
+      margin: 8px 0 12px;
+    }
+
+    .daily-review-copy p {
+      line-height: 1.9;
+      color: var(--story-text-soft);
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .impact-card {
+      padding: 22px;
+      border-radius: 24px;
+    }
+
+    .impact-card h4 {
+      font-family: "Noto Serif TC", serif;
+      font-size: 20px;
+      color: #2D4B24;
+      margin-bottom: 10px;
+    }
+
+    .group-chat-tool {
+      padding: 24px;
+      border-radius: 30px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(122,201,67,.22);
+      box-shadow: 0 18px 44px rgba(92,120,84,.13);
+    }
+
+    .group-tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .group-tab {
+      border: 1px solid rgba(122,201,67,.28);
+      background: #fff;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 800;
+      color: #2D4B24;
+      cursor: pointer;
+    }
+
+    .group-tab.active {
+      background: #F1FFD6;
+      border-color: rgba(122,201,67,.62);
+    }
+
+    .group-topic-panel {
+      display: grid;
+      gap: 14px;
+    }
+
+    .group-message {
+      max-width: 760px;
+      padding: 15px 17px;
+      border-radius: 20px;
+      background: #F6FBFF;
+      border: 1px solid rgba(110,198,255,.28);
+      box-shadow: 0 8px 18px rgba(92,120,84,.08);
+    }
+
+    .group-message strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #24496B;
+    }
+
+    .group-message p {
+      margin: 0;
+      line-height: 1.8;
+      color: var(--story-text-soft);
+    }
+
+    @media (max-width: 900px) {
+      .mechanics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .daily-review-tool {
+        grid-template-columns: 1fr;
+        padding: 18px;
+      }
+
+      .glossary-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .impact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .article-content p {
+        font-size: 16px;
+        line-height: 1.85;
+      }
+
+      .story-section {
+        width: min(100% - 24px, 860px);
+        padding: 48px 0;
+      }
+
+      .news-tool {
+        margin: 34px auto;
+      }
+
+      .reading-mode-toggle {
+        top: 8px;
+        max-width: calc(100% - 24px);
+        font-size: 13px;
+      }
+
+      .pikmin-hint-card {
+        grid-template-columns: 42px 1fr;
+        gap: 10px;
+        margin-top: 28px;
+        padding: 14px;
+      }
+
+      .pikmin-hint-card img {
+        width: 42px;
+        height: 42px;
+      }
+
+      .pikmin-hint-card p {
+        font-size: 13.5px;
+      }
+
+      .mechanics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .group-chat-tool {
+        padding: 18px;
+      }
+
+      .group-tab {
+        width: 100%;
+      }
+    }
+
+
+
+    /* ========== second local revision: interactive news tools + footer ========== */
+    .pikmin-hint-card img,
+    .pikmin-companion img.story-guide-img {
+      width: 56px;
+      height: 56px;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+    }
+
+    .compare-flip-tool .flip-grid {
+      align-items: stretch;
+    }
+
+    .compare-flip-tool .compare-card-wrap {
+      padding-top: 0;
+      min-height: 380px;
+    }
+
+    .compare-flip-tool .flip-card,
+    .compare-flip-tool .flip-inner {
+      min-height: 380px;
+      height: 100%;
+    }
+
+    .compare-flip-tool .flip-front {
+      justify-content: space-between;
+      gap: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(241,255,214,.7));
+    }
+
+    .compare-front-image {
+      width: 100%;
+      min-height: 170px;
+      border-radius: 22px;
+      border: 1px dashed rgba(122,201,67,.34);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.3), rgba(255,255,255,.72)),
+        var(--compare-img) center / cover no-repeat,
+        linear-gradient(135deg, #F1FFD6, #EAF7FF);
+      display: grid;
+      place-items: center;
+      color: rgba(45,75,36,.66);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.6;
+      padding: 12px;
+    }
+
+    .compare-flip-hint {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--story-text-soft);
+      font-weight: 800;
+    }
+
+    .compare-flip-tool .flip-back ul {
+      padding: 18px 18px 18px 26px;
+      margin: 10px 0 0;
+    }
+
+    .compare-flip-tool .flip-back li {
+      margin-bottom: 8px;
+    }
+
+    .glossary-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .glossary-flip-card {
+      min-height: 240px;
+      perspective: 1100px;
+      cursor: pointer;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      font: inherit;
+      text-align: left;
+    }
+
+    .glossary-flip-inner {
+      position: relative;
+      width: 100%;
+      min-height: 240px;
+      height: 100%;
+      transition: transform .68s cubic-bezier(.22,.68,0,1.05);
+      transform-style: preserve-3d;
+    }
+
+    .glossary-flip-card.flipped .glossary-flip-inner {
+      transform: rotateY(180deg);
+    }
+
+    .glossary-flip-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(122,201,67,.22);
+      box-shadow: 0 14px 30px rgba(92,120,84,.11);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .glossary-flip-front {
+      color: #fff;
+      background:
+        linear-gradient(180deg, rgba(32,49,31,.12), rgba(32,49,31,.72)),
+        var(--glossary-img) center / cover no-repeat,
+        linear-gradient(135deg, #BDEBFF, #F1FFD6);
+      text-align: center;
+    }
+
+    .glossary-flip-front::after {
+      content: "點擊翻開";
+      position: absolute;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.82);
+      color: #2D4B24;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .glossary-term {
+      position: relative;
+      z-index: 1;
+      font-family: "Noto Serif TC", serif;
+      font-size: 24px;
+      font-weight: 900;
+      text-shadow: 0 3px 12px rgba(0,0,0,.28);
+    }
+
+    .glossary-flip-back {
+      transform: rotateY(180deg);
+      background: rgba(255,255,255,.95);
+      color: var(--story-text);
+    }
+
+    .glossary-flip-back h4 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #2D4B24;
+    }
+
+    .glossary-flip-back p {
+      margin: 0;
+      font-size: 14.5px;
+      line-height: 1.85;
+      color: var(--story-text-soft);
+    }
+
+    .mechanics-layout {
+      display: grid;
+      gap: 18px;
+    }
+
+    .mechanic-card {
+      cursor: pointer;
+      text-align: left;
+      transition: transform .22s ease, border-color .22s ease, background .22s ease, box-shadow .22s ease;
+    }
+
+    .mechanic-card.active,
+    .mechanic-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(122,201,67,.62);
+      background: #F8FFF0;
+      box-shadow: 0 16px 34px rgba(92,120,84,.14);
+    }
+
+    .mechanic-detail-panel,
+    .timeline-detail-panel {
+      padding: 24px;
+      border-radius: 26px;
+      background: rgba(255,255,255,.94);
+      border: 1px solid rgba(122,201,67,.24);
+      box-shadow: 0 16px 34px rgba(92,120,84,.1);
+    }
+
+    .mechanic-detail-panel h4,
+    .timeline-detail-panel h4 {
+      font-family: "Noto Serif TC", serif;
+      font-size: clamp(22px, 3vw, 30px);
+      margin-bottom: 10px;
+      color: #2D4B24;
+    }
+
+    .mechanic-detail-panel p,
+    .timeline-detail-panel p {
+      margin: 0 0 12px;
+      line-height: 1.85;
+      color: var(--story-text-soft);
+    }
+
+    .mechanic-detail-panel p:last-child,
+    .timeline-detail-panel p:last-child {
+      margin-bottom: 0;
+    }
+
+    .mechanic-impact,
+    .timeline-impact {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: #FFF8E7;
+      border-left: 4px solid var(--pikmin-yellow);
+      color: #4B673D !important;
+    }
+
+    .timeline-item {
+      cursor: pointer;
+      transition: transform .22s ease, border-color .22s ease, background .22s ease, box-shadow .22s ease;
+    }
+
+    .timeline-item.active,
+    .timeline-item:hover {
+      transform: translateY(-4px) scale(1.02);
+      background: #F8FFF0;
+      border-color: rgba(122,201,67,.62);
+      box-shadow: 0 16px 34px rgba(92,120,84,.14);
+    }
+
+    .timeline-detail-panel {
+      margin-top: 18px;
+    }
+
+    .daily-game-photo-slot {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      min-height: 420px;
+      overflow: hidden;
+      border-radius: 24px;
+      background:
+        linear-gradient(135deg, rgba(241,255,214,.9), rgba(234,247,255,.92));
+      display: grid;
+      place-items: center;
+    }
+
+    .daily-game-photo-slot::after {
+      content: "每日回顧截圖預留位置";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      text-align: center;
+      color: #60765B;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.7;
+      border: 1px dashed rgba(122,201,67,.34);
+      border-radius: inherit;
+    }
+
+    .daily-game-photo-slot img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .impact-card {
+      cursor: pointer;
+      transition: transform .22s ease, border-color .22s ease, background .22s ease, box-shadow .22s ease;
+    }
+
+    .impact-card.active,
+    .impact-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(122,201,67,.62);
+      background: #F8FFF0;
+      box-shadow: 0 16px 34px rgba(92,120,84,.14);
+    }
+
+    .impact-detail {
+      display: none;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(122,201,67,.18);
+    }
+
+    .impact-card.active .impact-detail {
+      display: grid;
+      gap: 10px;
+      animation: softAppear .35s ease both;
+    }
+
+    .impact-detail p {
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .impact-detail strong {
+      color: #2D4B24;
+    }
+
+    .story-footer {
+      width: min(960px, calc(100% - 32px));
+      margin: clamp(28px, 6vw, 72px) auto 0;
+      padding: clamp(28px, 5vw, 46px);
+      border-radius: 34px 34px 0 0;
+      background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(241,255,214,.78));
+      border: 1px solid rgba(122,201,67,.22);
+      border-bottom: none;
+      box-shadow: 0 -10px 34px rgba(92,120,84,.08);
+    }
+
+    .footer-inner {
+      display: grid;
+      gap: 28px;
+    }
+
+    .footer-credit-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .footer-credit-item {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(122,201,67,.18);
+    }
+
+    .footer-credit-label {
+      margin-bottom: 8px;
+      color: #60765B;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+
+    .footer-credit-name {
+      color: #2D4B24;
+      font-family: "Noto Serif TC", serif;
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.6;
+    }
+
+    .footer-share-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .footer-share-btn,
+    .back-to-top-btn {
+      border: 1px solid rgba(122,201,67,.28);
+      background: #fff;
+      color: #2D4B24;
+      border-radius: 999px;
+      padding: 11px 18px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .22s ease;
+    }
+
+    .footer-share-btn:hover,
+    .back-to-top-btn:hover {
+      transform: translateY(-2px);
+      background: #F1FFD6;
+      border-color: rgba(122,201,67,.62);
+    }
+
+    .back-to-top-btn {
+      justify-self: center;
+    }
+
+    .footer-copyright {
+      text-align: center;
+      color: var(--story-text-soft);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 860px) {
+      .compare-flip-tool .flip-grid,
+      .glossary-grid,
+      .footer-credit-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .compare-flip-tool .compare-card-wrap,
+      .compare-flip-tool .flip-card,
+      .compare-flip-tool .flip-inner {
+        min-height: 360px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .pikmin-hint-card img,
+      .pikmin-companion img.story-guide-img {
+        width: 44px;
+        height: 44px;
+        aspect-ratio: 1 / 1;
+      }
+
+      .glossary-flip-card,
+      .glossary-flip-inner {
+        min-height: 220px;
+      }
+
+      .daily-game-photo-slot {
+        min-height: 360px;
+      }
+
+      .mechanic-detail-panel,
+      .timeline-detail-panel {
+        padding: 18px;
+      }
+
+      .story-footer {
+        width: min(100% - 24px, 960px);
+        border-radius: 28px 28px 0 0;
+        padding: 24px 18px;
+      }
+
+      .footer-share-btn,
+      .back-to-top-btn {
+        width: 100%;
+      }
+    }
+
+
+    /* ========== final local revision: notification / glossary cards / image cards / inline timeline / integrated credits ========== */
+    .article-app-notification {
+      max-width: 520px;
+      margin: 0 0 28px;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 12px;
+      align-items: start;
+      border-radius: 24px;
+      background: rgba(248, 250, 255, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      box-shadow: 0 18px 40px rgba(92, 120, 84, 0.14);
+      backdrop-filter: blur(18px);
+      animation: notifyDrop .72s cubic-bezier(.22,.68,0,1.08) both;
+    }
+
+    .article-app-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #F1FFD6, #BDEBFF);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .article-app-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      font-size: 0;
+      color: transparent;
+    }
+
+    .article-app-icon img:not([src]),
+    .article-app-icon img[src=""] {
+      display: none;
+    }
+
+    .article-notification-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 12px;
+      color: #6b7280;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .article-notification-title {
+      font-size: 14.5px;
+      line-height: 1.45;
+      color: #111827;
+      font-weight: 900;
+    }
+
+    .article-notification-body {
+      margin-top: 3px;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: #374151;
+      font-weight: 600;
+    }
+
+    .glossary-click-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .glossary-card-item {
+      border: 1px solid rgba(122,201,67,.22);
+      border-radius: 22px;
+      padding: 18px;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 12px 26px rgba(92,120,84,.08);
+      transition: .22s ease;
+      font: inherit;
+      color: var(--story-text);
+    }
+
+    .glossary-card-item:hover,
+    .glossary-card-item.active {
+      transform: translateY(-3px);
+      border-color: rgba(122,201,67,.55);
+      box-shadow: 0 16px 34px rgba(92,120,84,.13);
+    }
+
+    .tone-green { background: linear-gradient(135deg, #F1FFD6, #FFFFFF); }
+    .tone-blue { background: linear-gradient(135deg, #EAF7FF, #FFFFFF); }
+    .tone-yellow { background: linear-gradient(135deg, #FFF8C7, #FFFFFF); }
+    .tone-pink { background: linear-gradient(135deg, #FFEAF1, #FFFFFF); }
+
+    .glossary-card-title {
+      display: block;
+      font-family: "Noto Serif TC", serif;
+      font-size: 21px;
+      font-weight: 900;
+      color: #2D4B24;
+      margin-bottom: 8px;
+    }
+
+    .glossary-card-brief,
+    .glossary-card-detail {
+      display: block;
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--story-text-soft);
+    }
+
+    .glossary-more-label {
+      display: inline-flex;
+      margin-top: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.72);
+      color: #4f7e4f;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .glossary-card-detail {
+      display: none;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(122,201,67,.18);
+    }
+
+    .glossary-card-item.active .glossary-card-detail {
+      display: block;
+    }
+
+    .compare-flip-tool .flip-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .compare-flip-tool .compare-card-wrap {
+      min-height: 420px;
+      padding-top: 0;
+    }
+
+    .compare-flip-tool .flip-card,
+    .compare-flip-tool .flip-inner {
+      min-height: 420px;
+      height: 100%;
+    }
+
+    .compare-image-front {
+      position: relative;
+      padding: 0 !important;
+      justify-content: flex-end !important;
+      overflow: hidden;
+      background: linear-gradient(135deg, #F1FFD6, #EAF7FF) !important;
+    }
+
+    .compare-image-front::before {
+      display: none;
+    }
+
+    .compare-image-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.02);
+    }
+
+    .compare-image-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(255,255,255,.35), transparent 24%),
+        linear-gradient(135deg, rgba(241,255,214,.72), rgba(234,247,255,.72));
+    }
+
+    .compare-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(32,49,31,.08), rgba(32,49,31,.68));
+    }
+
+    .compare-front-copy {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 24px;
+      color: #fff;
+      text-align: left;
+    }
+
+    .compare-front-copy h3 {
+      color: #fff;
+      font-size: 28px;
+      margin-bottom: 8px;
+      text-shadow: 0 4px 14px rgba(0,0,0,.28);
+    }
+
+    .compare-front-copy p {
+      margin: 0 0 12px;
+      color: rgba(255,255,255,.92);
+      line-height: 1.6;
+    }
+
+    .compare-front-copy span {
+      display: inline-flex;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.84);
+      color: #2D4B24;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .compare-flip-tool .flip-back {
+      padding: 28px;
+    }
+
+    .compare-flip-tool .flip-back ul {
+      padding: 18px 18px 18px 26px;
+      margin: 14px 0 0;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .timeline-item {
+      width: 100%;
+      border: 1px solid rgba(122,201,67,.22);
+      text-align: left;
+      font: inherit;
+      color: var(--story-text);
+    }
+
+    .timeline-inline-detail {
+      display: none;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(122,201,67,.18);
+    }
+
+    .timeline-item.active .timeline-inline-detail {
+      display: block;
+      animation: softAppear .28s ease both;
+    }
+
+    .timeline-inline-detail p {
+      margin: 0 0 10px;
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--story-text-soft);
+    }
+
+    .timeline-inline-detail p:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-inline-detail strong {
+      color: #2D4B24;
+    }
+
+    .timeline-detail-panel {
+      display: none !important;
+    }
+
+    .daily-phone-frame {
+      max-width: 280px;
+      margin: 0 auto;
+      padding: 0;
+      border-radius: 34px;
+      border: 8px solid #172033;
+      background: #172033;
+      overflow: hidden;
+    }
+
+    .daily-game-photo-slot {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      min-height: 460px;
+      overflow: hidden;
+      border-radius: 24px;
+      background: #111827;
+      display: block;
+    }
+
+    .daily-game-photo-slot::after {
+      content: "每日回顧截圖預留位置";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      text-align: center;
+      color: rgba(255,255,255,.62);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.7;
+      background: linear-gradient(135deg, #172033, #40527A);
+      z-index: 0;
+    }
+
+    .daily-game-photo-slot img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .article-credit-block {
+      margin-top: 48px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(122,201,67,.24);
+      color: var(--story-text-soft);
+    }
+
+    .article-credit-line {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 16px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .article-credit-line strong {
+      color: #2D4B24;
+      font-weight: 900;
+    }
+
+    .article-credit-line span {
+      color: var(--story-text-soft);
+    }
+
+    .article-share-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .article-share-btn,
+    .article-back-to-top {
+      border: 1px solid rgba(122,201,67,.28);
+      background: rgba(255,255,255,.72);
+      color: #2D4B24;
+      border-radius: 999px;
+      padding: 9px 14px;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .22s ease;
+    }
+
+    .article-share-btn:hover,
+    .article-back-to-top:hover {
+      background: #F1FFD6;
+      border-color: rgba(122,201,67,.58);
+      transform: translateY(-1px);
+    }
+
+    .article-back-to-top {
+      margin-top: 14px;
+    }
+
+    .article-copyright {
+      margin-top: 22px;
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--story-text-soft);
+    }
+
+    @media (max-width: 860px) {
+      .compare-flip-tool .flip-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .compare-flip-tool .compare-card-wrap,
+      .compare-flip-tool .flip-card,
+      .compare-flip-tool .flip-inner {
+        min-height: 380px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .glossary-click-grid,
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .article-app-notification {
+        max-width: 100%;
+        margin-bottom: 24px;
+      }
+
+      .article-credit-line {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      .article-share-btn,
+      .article-back-to-top {
+        width: 100%;
+      }
+    }
+
+
+    /* ========== requested final refinements: true flip cards / timeline default / impact flex / centered credits ========== */
+    .article-app-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #F1FFD6, #BDEBFF);
+      display: grid;
+      place-items: center;
+    }
+
+    .article-app-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      font-size: 0;
+      color: transparent;
+    }
+
+    .article-app-icon img:not([src]),
+    .article-app-icon img[src=""] {
+      display: none;
+    }
+
+    .compare-flip-tool .flip-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .compare-flip-tool .compare-card-wrap,
+    .compare-flip-tool .compare-flip-card,
+    .compare-flip-tool .flip-inner {
+      min-height: 420px;
+      height: 100%;
+    }
+
+    .compare-flip-card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      display: block;
+      font: inherit;
+      text-align: initial;
+      perspective: 1100px;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .compare-flip-card .flip-inner {
+      position: relative;
+      width: 100%;
+      transition: transform .72s cubic-bezier(.22,.68,0,1.05);
+      transform-style: preserve-3d;
+    }
+
+    .compare-flip-card.is-flipped .flip-inner,
+    .compare-flip-card.flipped .flip-inner {
+      transform: rotateY(180deg);
+    }
+
+    .compare-flip-card .flip-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 30px;
+      border: 1px solid rgba(122,201,67,.22);
+      box-shadow: 0 16px 34px rgba(92,120,84,.12);
+      overflow: hidden;
+    }
+
+    .compare-flip-card .flip-front {
+      transform: rotateY(0deg);
+    }
+
+    .compare-flip-card .flip-back {
+      transform: rotateY(180deg);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+    }
+
+    .compare-image-front {
+      position: relative;
+      padding: 0 !important;
+      justify-content: flex-end !important;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255,255,255,.34), transparent 24%),
+        linear-gradient(135deg, #F1FFD6, #EAF7FF) !important;
+    }
+
+    .compare-image-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.02);
+    }
+
+
+    .compare-front-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      z-index: 0;
+      transform: scale(1.02);
+    }
+
+    .compare-front-img.is-missing {
+      display: none;
+    }
+
+    .compare-image-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(255,255,255,.35), transparent 24%),
+        linear-gradient(135deg, rgba(241,255,214,.68), rgba(234,247,255,.68));
+    }
+
+    .compare-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(32,49,31,.08), rgba(32,49,31,.68));
+    }
+
+    .compare-front-copy {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 24px;
+      color: #fff;
+      text-align: left;
+    }
+
+    .compare-front-copy h3 {
+      color: #fff;
+      font-size: 28px;
+      margin-bottom: 8px;
+      text-shadow: 0 4px 14px rgba(0,0,0,.28);
+    }
+
+    .compare-front-copy p {
+      margin: 0 0 12px;
+      color: rgba(255,255,255,.92);
+      line-height: 1.6;
+    }
+
+    .compare-front-copy span {
+      display: inline-flex;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.84);
+      color: #2D4B24;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .compare-flip-card .flip-back ul {
+      padding: 18px 18px 18px 26px;
+      margin: 14px 0 0;
+      background: rgba(255,255,255,.74);
+      border: 1px solid rgba(255,255,255,.55);
+      border-radius: 20px;
+    }
+
+    .compare-flip-card .flip-back li {
+      margin-bottom: 10px;
+      line-height: 1.75;
+    }
+
+    .timeline-item.active {
+      transform: translateY(-4px) scale(1.02);
+      background: #F8FFF0;
+      border-color: rgba(122,201,67,.62);
+      box-shadow: 0 16px 34px rgba(92,120,84,.14);
+    }
+
+    .daily-phone-frame {
+      max-width: 280px;
+      margin: 0 auto;
+      padding: 0;
+      border-radius: 34px;
+      border: 8px solid #172033;
+      background: #172033;
+      overflow: hidden;
+    }
+
+    .daily-game-photo-slot {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      min-height: 460px;
+      overflow: hidden;
+      border-radius: 24px;
+      background: #111827;
+      display: block;
+    }
+
+    .daily-game-photo-slot::after {
+      content: "每日回顧截圖預留位置";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      text-align: center;
+      color: rgba(255,255,255,.62);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.7;
+      background: linear-gradient(135deg, #172033, #40527A);
+      z-index: 0;
+    }
+
+    .daily-game-photo-slot img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .impact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .impact-card {
+      width: calc(50% - 8px);
+      align-self: flex-start;
+      height: auto !important;
+    }
+
+    .article-credit-centered {
+      max-width: 760px;
+      margin: 72px auto 0;
+      padding-top: 40px;
+      border-top: 1px solid rgba(122, 201, 67, 0.18);
+      text-align: center;
+    }
+
+    .article-credit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px 80px;
+      justify-content: center;
+      text-align: left;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .article-credit-col {
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .article-credit-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .article-credit-label {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: rgba(45, 75, 36, 0.58);
+      font-weight: 800;
+    }
+
+    .article-credit-value {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--story-text);
+    }
+
+    .article-credit-divider {
+      width: 40px;
+      height: 1px;
+      margin: 36px auto 0;
+      background: rgba(122, 201, 67, 0.42);
+    }
+
+    .centered-share-row {
+      justify-content: center;
+      margin-top: 36px;
+    }
+
+    .centered-back-to-top {
+      display: inline-flex;
+      margin-top: 28px;
+    }
+
+    .centered-copyright {
+      text-align: center;
+      margin-top: 42px;
+      font-size: 13px;
+      color: rgba(80, 98, 75, 0.72);
+    }
+
+    .article-share-btn,
+    .article-back-to-top {
+      border: 1px solid rgba(122,201,67,.24);
+      background: rgba(255,255,255,.74);
+      color: #44643A;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .22s ease;
+    }
+
+    .article-share-btn:hover,
+    .article-back-to-top:hover {
+      background: #F1FFD6;
+      border-color: rgba(122,201,67,.5);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 860px) {
+      .compare-flip-tool .flip-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .compare-flip-tool .compare-card-wrap,
+      .compare-flip-tool .compare-flip-card,
+      .compare-flip-tool .flip-inner {
+        min-height: 380px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .impact-card {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .article-credit-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        text-align: center;
+      }
+
+      .article-credit-col {
+        gap: 18px;
+      }
+
+      .centered-share-row {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .article-share-btn,
+      .article-back-to-top {
+        width: min(240px, 100%);
+        justify-content: center;
+      }
+    }
+
+
+    /*
+      圖片檔名總表（可直接把圖片放到對應路徑）：
+      - 封面主視覺：images/opening-night-street.png
+      - 前導手機背景：images/night-phone-bg.png
+      - 前導通知 app icon：images/app-icon-pikmin.png
+      - 正文通知 app icon：images/pikmin-app-icon.png
+      - 導讀皮克敏：images/guide-red.png / images/guide-yellow.png / images/guide-blue.png / images/guide-purple.png / images/guide-white.png / images/guide-rock.png / images/guide-winged.png / images/guide-ice.png
+      - 三遊戲翻卡：images/compare-ingress-front.jpg / images/compare-pokemon-go-front.jpg / images/compare-pikmin-bloom-front.jpg
+      - 每日回顧截圖：images/daily-review-screenshot.jpg
+      - 心理測驗題圖：image/question-1.jpg、image/question-2.jpg、image/question-4.jpg、image/question-5.jpg、image/question-6.jpg、image/question-8.jpg、image/question-10.jpg、image/question-11.jpg、image/question-12.jpg、image/question-13.jpg、image/question-15.jpg、image/question-16.jpg
+      - 結果影片：video/result-red.mp4 / video/result-yellow.mp4 / video/result-blue.mp4 / video/result-purple.mp4 / video/result-white.mp4 / video/result-rock.mp4 / video/result-winged.mp4 / video/result-ice.mp4
+      - 配對圖片：image/match-red.jpg / image/match-yellow.jpg / image/match-blue.jpg / image/match-purple.jpg / image/match-white.jpg / image/match-rock.jpg / image/match-winged.jpg / image/match-ice.jpg
+    */
   </style>
 </head>
 <body>
@@ -1662,7 +3197,9 @@
         <p>從一則睡前通知開始，跟著你的皮克敏走進這個改寫日常的走路遊戲世界。</p>
         <button class="btn btn-primary" id="opening-start-btn" type="button">先測出你的皮克敏 →</button>
       </div>
-      <div class="opening-visual" aria-label="夜晚散步開場圖預留位置"></div>
+      <div class="opening-visual" aria-label="">
+        <img class="opening-visual-img" src="image/opening-night-street.png" alt="" onerror="this.classList.add('is-missing')">
+      </div>
     </div>
   </section>
   <div class="quiz-wrap">
@@ -1846,7 +3383,7 @@
           <div class="notification-card phone-step" id="phone-notification-card">
             <div class="notification-row">
               <div class="notification-app-icon">
-                <img src="images/app-icon-pikmin.png" alt="Pikmin Bloom app icon">
+                <img src="image/pikmin-app-icon.jpg" alt="Pikmin Bloom app icon">
               </div>
               <div class="notification-main">
                 <div class="notification-meta">
@@ -1859,7 +3396,7 @@
             </div>
           </div>
           <div class="phone-guide phone-step" id="phone-guide-step">
-            <img class="guide-img story-guide-img" src="images/guide-red.png" alt="導讀皮克敏">
+            <img class="guide-img story-guide-img" src="image/guide-red.png" alt="導讀皮克敏">
             <div>
               <div class="guide-bubble" id="phone-typewriter"></div>
               <div class="phone-chat-log" id="phone-chat-log"></div>
@@ -1876,12 +3413,13 @@
     </section>
 
     <main class="story-main" id="story-main">
+      <button class="reading-mode-toggle" id="reading-mode-toggle" type="button">減少互動，專心閱讀</button>
       <section class="story-section" id="intro-article-section">
         <article class="article-card">
           <div class="article-content">
             <div class="article-app-notification">
               <div class="article-app-icon">
-                <img src="images/app-icon-pikmin.png" alt="Pikmin Bloom app icon">
+                <img src="image/pikmin-app-icon.jpg" alt="" onerror="this.style.display='none'">
               </div>
               <div class="article-notification-content">
                 <div class="article-notification-meta">
@@ -1896,16 +3434,117 @@
           </div>
         </article>
       </section>
-      <section class="chat-scene" data-scene-id="intro-combo"></section>
+      <section class="story-section pikmin-companion-section">
+        <div class="pikmin-hint-card pikmin-companion">
+          <img class="story-guide-img" src="image/guide-red.png" alt="你的皮克敏">
+          <p><strong>皮克敏小提醒：</strong>接下來請把牠當成安靜的陪讀者。正文會以報導為主，互動只在段落之間幫你整理重點。</p>
+        </div>
+      </section>
 
-      <section class="chat-scene" data-scene-id="chapter1-combo"></section>
       <section class="story-section">
         <article class="article-card">
           <h2>「皮克敏可以收成了！」　通勤路上的盲盒派對</h2>
           <div class="article-content">
             <p>由任天堂與《Pokémon GO》開發商 Niantic 合作開發的《皮克敏 Bloom》（簡稱皮克敏），其實早在 2021 年便已上線。在台上線四年多後，卻在近幾個月突然翻紅，不僅在今年二月問鼎 App Store 免費遊戲排行榜冠軍，更在社群媒體上迅速擴張「皮友」（註一）社群。無論是玩家們在 Threads 上分享自己獲得的特殊飾品、明信片，還是規模達 15 萬人的臉書社團，都顯示皮克敏正在快速擴張版圖。</p>
             <p class="article-note">註一：皮友，皮克敏遊戲玩家。</p>
+
+            <section class="news-tool glossary-card">
+              <div class="tool-header">
+                <span class="tool-kicker">Glossary</span>
+                <h3>讀懂皮克敏之前，先認識這些詞</h3>
+              </div>
+
+              <div class="glossary-grid glossary-click-grid">
+                <button class="glossary-card-item tone-green" type="button">
+                  <span class="glossary-card-title">皮友</span>
+                  <span class="glossary-card-brief">Pikmin Bloom 玩家之間的暱稱。</span>
+                  <span class="glossary-more-label">點擊看更多</span>
+                  <span class="glossary-card-detail">在社群討論中，玩家常以「皮友」稱呼彼此，形成一種玩家社群內部的親暱語彙。</span>
+                </button>
+
+                <button class="glossary-card-item tone-blue" type="button">
+                  <span class="glossary-card-title">LBS 遊戲</span>
+                  <span class="glossary-card-brief">結合 GPS 定位與現實地圖的遊戲。</span>
+                  <span class="glossary-more-label">點擊看更多</span>
+                  <span class="glossary-card-detail">LBS 是 Location-Based Service，遊戲會根據玩家現實位置產生任務、地點或互動內容。</span>
+                </button>
+
+                <button class="glossary-card-item tone-yellow" type="button">
+                  <span class="glossary-card-title">打蘑菇</span>
+                  <span class="glossary-card-brief">玩家合作挑戰蘑菇任務。</span>
+                  <span class="glossary-more-label">點擊看更多</span>
+                  <span class="glossary-card-detail">玩家可以派出皮克敏參與蘑菇挑戰，也能邀請朋友加入，完成後取得道具與明信片。</span>
+                </button>
+
+                <button class="glossary-card-item tone-pink" type="button">
+                  <span class="glossary-card-title">Party Walk</span>
+                  <span class="glossary-card-brief">玩家共同參與的步行活動。</span>
+                  <span class="glossary-more-label">點擊看更多</span>
+                  <span class="glossary-card-detail">Party Walk 讓玩家把個人步行變成集體目標，也讓遊戲多了一層社群參與感。</span>
+                </button>
+
+                <button class="glossary-card-item tone-blue" type="button">
+                  <span class="glossary-card-title">明信片</span>
+                  <span class="glossary-card-brief">與地點相關的遊戲紀念圖像。</span>
+                  <span class="glossary-more-label">點擊看更多</span>
+                  <span class="glossary-card-detail">明信片通常與玩家走過的地點相關，也常被用來與朋友交換、問候或收藏。</span>
+                </button>
+
+                <button class="glossary-card-item tone-green" type="button">
+                  <span class="glossary-card-title">飾品皮克敏</span>
+                  <span class="glossary-card-brief">依地點或活動取得特殊造型。</span>
+                  <span class="glossary-more-label">點擊看更多</span>
+                  <span class="glossary-card-detail">不同地點可能產生不同飾品皮克敏，讓玩家像抽盲盒一樣期待下一個收集結果。</span>
+                </button>
+
+                <button class="glossary-card-item tone-yellow" type="button">
+                  <span class="glossary-card-title">每日回顧</span>
+                  <span class="glossary-card-brief">整理步數、軌跡、照片與心情。</span>
+                  <span class="glossary-more-label">點擊看更多</span>
+                  <span class="glossary-card-detail">每日回顧把玩家一天的移動與照片整理成紀錄，使遊戲成為生活索引。</span>
+                </button>
+              </div>
+            </section>
             <p>不同於多數需要長時間專注與操作的手遊，皮克敏將遊戲任務拆解進玩家日常行動中——走路。玩家藉由累積步數培育新的皮克敏，同時還要餵食皮克敏不同花朵的精華，才能蒐集相應的花瓣；接著透過移動灑下花瓣，累積獎勵賺取金幣和花苗。此外，還可以與其他玩家合作摧毀蘑菇，藉此蒐集更多道具、明信片來推進遊戲進度。</p>
+
+            <section class="news-tool mechanics-tool" aria-label="Pikmin Bloom 玩法拆解">
+              <div class="tool-header">
+                <span class="tool-kicker">Game Mechanics</span>
+                <h3>Pikmin Bloom 玩法拆解</h3>
+                <p>點選玩法卡，看看每個機制如何從遊戲任務延伸到玩家生活。</p>
+              </div>
+
+              <div class="mechanics-layout">
+                <div class="mechanics-grid">
+                  <button class="mechanic-card active" type="button" data-mechanic="walk">
+                    <h4>走路累積步數</h4>
+                    <p>玩家透過日常移動培育皮克敏。</p>
+                  </button>
+                  <button class="mechanic-card" type="button" data-mechanic="flower">
+                    <h4>種花</h4>
+                    <p>移動時灑下花瓣，讓走過的路變成遊戲成果。</p>
+                  </button>
+                  <button class="mechanic-card" type="button" data-mechanic="mushroom">
+                    <h4>打蘑菇</h4>
+                    <p>與其他玩家合作完成任務。</p>
+                  </button>
+                  <button class="mechanic-card" type="button" data-mechanic="decor">
+                    <h4>飾品蒐集</h4>
+                    <p>皮克敏會依地點獲得不同造型。</p>
+                  </button>
+                  <button class="mechanic-card" type="button" data-mechanic="lookback">
+                    <h4>每日回顧</h4>
+                    <p>系統整理步數、軌跡、照片與心情。</p>
+                  </button>
+                </div>
+
+                <div class="mechanic-detail-panel" id="mechanic-detail-panel">
+                  <h4 id="mechanic-detail-title">走路累積步數</h4>
+                  <p id="mechanic-detail-text">通勤、散步、繞路都會被轉換成遊戲進度，讓原本普通的移動變成可以被累積的成果。</p>
+                  <p class="mechanic-impact"><strong>它如何影響玩家生活：</strong><span id="mechanic-detail-impact">玩家更容易為了完成步數或活動任務，主動改變路線。</span></p>
+                </div>
+              </div>
+            </section>
             <p>如果說「走路」是讓玩家打開遊戲的理由，那充滿未知的「飾品造型」才是讓玩家深陷遊戲的關鍵。皮克敏會根據取得地點戴上相應的飾品，例如漢堡店紙盒、車站票券，以及每月活動跟節慶限定造型，這些都是玩家熱衷蒐集的目標。對玩家而言，這不只是單純的數值累積，更像是一種「抽盲盒」的過程。</p>
           </div>
         </article>
@@ -1913,13 +3552,89 @@
 
       <section id="game-compare-section" class="story-section">
         <div class="section-head"><h2>三種走進城市的方式</h2><p>同樣使用定位，Ingress、Pokémon GO 與 Pikmin Bloom 帶給玩家的身體經驗並不相同。</p></div>
-        <div class="flip-grid">
-          <div class="compare-card-wrap"><img class="compare-holder-pikmin" id="sign-comp" src="images/sign-blue.png" alt="最互補夥伴舉牌"><div class="flip-card" tabindex="0" role="button" aria-label="翻開 Ingress 比較卡"><div class="flip-inner"><div class="flip-face flip-front game-front-image"><img src="images/card-ingress-front.png" alt="Ingress"></div><div class="flip-face flip-back ingress"><h3>Ingress</h3><ul><li>核心玩法：佔領 Portal、陣營攻防</li><li>操作感：需要策略與移動</li><li>城市感：城市成為戰場與路線網絡</li></ul></div></div></div></div>
-          <div class="compare-card-wrap"><img class="compare-holder-pikmin" id="sign-best" src="images/sign-purple.png" alt="最合拍搭檔舉牌"><div class="flip-card" tabindex="0" role="button" aria-label="翻開 Pokémon GO 比較卡"><div class="flip-inner"><div class="flip-face flip-front game-front-image"><img src="images/card-pokemon-go-front.png" alt="Pokémon GO"></div><div class="flip-face flip-back pokemon"><h3>Pokémon GO</h3><ul><li>核心玩法：捕捉、道館、團體戰</li><li>操作感：需要較常看螢幕</li><li>城市感：城市成為抓寶地圖</li></ul></div></div></div></div>
-          <div class="compare-card-wrap"><img class="compare-holder-pikmin" id="sign-result" src="images/sign-red.png" alt="讀者測出的皮克敏舉牌"><div class="flip-card" tabindex="0" role="button" aria-label="翻開 Pikmin Bloom 比較卡"><div class="flip-inner"><div class="flip-face flip-front game-front-image"><img src="images/card-pikmin-bloom-front.png" alt="Pikmin Bloom"></div><div class="flip-face flip-back pikmin"><h3>Pikmin Bloom</h3><ul><li>核心玩法：走路、種花、收集飾品與明信片</li><li>操作感：低壓、不必長時間盯螢幕</li><li>城市感：城市成為日常回憶與尋寶地圖</li></ul></div></div></div></div>
+
+        <div class="news-tool compare-flip-tool">
+          <div class="flip-grid">
+            <div class="compare-card-wrap">
+              <button class="flip-card compare-flip-card" type="button" aria-label="翻開 Ingress 卡片">
+                <div class="flip-inner">
+                  <div class="flip-face flip-front compare-image-front ingress-front">
+                    <img class="compare-front-img" src="image/compare-ingress-front.jpg" alt="" onerror="this.classList.add('is-missing')">
+                    <div class="compare-image-bg" style="background-image:url('images/compare-ingress-front.jpg');"></div>
+                    <div class="compare-image-overlay"></div>
+                    <div class="compare-front-copy">
+                      <h3>Ingress</h3>
+                      <p>城市像戰場與路線網絡</p>
+                      <span>點擊翻開</span>
+                    </div>
+                  </div>
+
+                  <div class="flip-face flip-back ingress">
+                    <h3>Ingress</h3>
+                    <ul>
+                      <li>核心玩法：佔領 Portal、陣營攻防</li>
+                      <li>操作感：需要策略與移動</li>
+                      <li>城市感：城市成為戰場與路線網絡</li>
+                    </ul>
+                  </div>
+                </div>
+              </button>
+            </div>
+
+            <div class="compare-card-wrap">
+              <button class="flip-card compare-flip-card" type="button" aria-label="翻開 Pokémon GO 卡片">
+                <div class="flip-inner">
+                  <div class="flip-face flip-front compare-image-front pokemon-front">
+                    <img class="compare-front-img" src="image/compare-pokemon-go-front.jpg" alt="" onerror="this.classList.add('is-missing')">
+                    <div class="compare-image-bg" style="background-image:url('images/compare-pokemon-go-front.jpg');"></div>
+                    <div class="compare-image-overlay"></div>
+                    <div class="compare-front-copy">
+                      <h3>Pokémon GO</h3>
+                      <p>城市像抓寶地圖</p>
+                      <span>點擊翻開</span>
+                    </div>
+                  </div>
+
+                  <div class="flip-face flip-back pokemon">
+                    <h3>Pokémon GO</h3>
+                    <ul>
+                      <li>核心玩法：捕捉、道館、團體戰</li>
+                      <li>操作感：需要較常看螢幕</li>
+                      <li>城市感：城市成為抓寶地圖</li>
+                    </ul>
+                  </div>
+                </div>
+              </button>
+            </div>
+
+            <div class="compare-card-wrap">
+              <button class="flip-card compare-flip-card" type="button" aria-label="翻開 Pikmin Bloom 卡片">
+                <div class="flip-inner">
+                  <div class="flip-face flip-front compare-image-front pikmin-front">
+                    <img class="compare-front-img" src="image/compare-pikmin-bloom-front.jpg" alt="" onerror="this.classList.add('is-missing')">
+                    <div class="compare-image-bg" style="background-image:url('images/compare-pikmin-bloom-front.jpg');"></div>
+                    <div class="compare-image-overlay"></div>
+                    <div class="compare-front-copy">
+                      <h3>Pikmin Bloom</h3>
+                      <p>城市像日常回憶與尋寶地圖</p>
+                      <span>點擊翻開</span>
+                    </div>
+                  </div>
+
+                  <div class="flip-face flip-back pikmin">
+                    <h3>Pikmin Bloom</h3>
+                    <ul>
+                      <li>核心玩法：走路、種花、收集飾品與明信片</li>
+                      <li>操作感：低壓、不必長時間盯螢幕</li>
+                      <li>城市感：城市成為日常回憶與尋寶地圖</li>
+                    </ul>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
         </div>
       </section>
-
       <section class="story-section">
         <article class="article-card">
           <div class="article-content">
@@ -1931,7 +3646,6 @@
         </article>
       </section>
 
-      <section class="chat-scene" data-scene-id="chapter2-combo"></section>
       <section class="story-section">
         <article class="article-card">
           <h2>社群話題延續熱度　皮克敏逐步成為生活夥伴</h2>
@@ -1943,11 +3657,88 @@
         </article>
       </section>
       <section class="story-section">
+        <section class="news-tool timeline-tool">
+          <div class="tool-header">
+            <span class="tool-kicker">Timeline</span>
+            <h3>皮克敏為何突然爆紅？</h3>
+            <p>點擊時間線節點，查看每個事件如何推動熱度擴散。</p>
+          </div>
+
+          <div class="timeline">
+            <button class="timeline-item active" type="button" data-timeline="launch">
+              <time>2021 年</time>
+              <p>Pikmin Bloom 上線</p>
+              <div class="timeline-inline-detail">
+                <p>Pikmin Bloom 上線，主打走路、種花與日常紀錄，讓定位遊戲不只停留在捕捉或戰鬥，也開始連結生活軌跡。</p>
+                <p><strong>影響：</strong>建立低壓、日常型走路遊戲的基本玩法。</p>
+              </div>
+            </button>
+            <button class="timeline-item" type="button" data-timeline="before">
+              <time>2025 年 8 月前</time>
+              <p>下載排名約落在百名左右</p>
+              <div class="timeline-inline-detail">
+                <p>在爆紅前，皮克敏的下載排名大多落在百名左右，玩家圈仍相對集中。</p>
+                <p><strong>影響：</strong>這段低基期讓後續排名上升更明顯，也凸顯社群擴散的效果。</p>
+              </div>
+            </button>
+            <button class="timeline-item" type="button" data-timeline="kaohsiung">
+              <time>高雄合作活動後</time>
+              <p>排名逐漸上升，社群討論增加</p>
+              <div class="timeline-inline-detail">
+                <p>地方合作活動讓更多玩家注意到遊戲，也讓社群平台上的討論逐漸增加。</p>
+                <p><strong>影響：</strong>地方活動先把玩家討論升溫，成為後續社群爆發的前置節點。</p>
+              </div>
+            </button>
+            <button class="timeline-item" type="button" data-timeline="leka">
+              <time>樂咖 IG 影片爆紅</time>
+              <p>影片觀看數超過 300 萬</p>
+              <div class="timeline-inline-detail">
+                <p>喜劇演員樂咖在 Instagram 發布皮克敏重度玩家相關影片，觀看數超過 300 萬，讓原本較小眾的玩家經驗被推到更大的社群視野。</p>
+                <p><strong>影響：</strong>影片把「皮克敏玩家到底在忙什麼」轉化成大眾可理解、可轉傳的社群內容，成為爆紅關鍵轉折。</p>
+              </div>
+            </button>
+            <button class="timeline-item" type="button" data-timeline="anniversary">
+              <time>2025 年 11 月</time>
+              <p>四週年活動單月新增下載量達 66.7 萬</p>
+              <div class="timeline-inline-detail">
+                <p>四週年活動期間，單月新增下載量達 66.7 萬，成為遊戲上線後的重要成長節點。</p>
+                <p><strong>影響：</strong>活動獎勵與社群討論相互推動，使既有玩家與新玩家同時被吸引。</p>
+              </div>
+            </button>
+            <button class="timeline-item" type="button" data-timeline="social">
+              <time>社群擴散</time>
+              <p>Threads、攻略、明信片交換持續推動熱度</p>
+              <div class="timeline-inline-detail">
+                <p>玩家在 Threads 分享入坑原因、攻略、明信片與特殊飾品，讓遊戲內容持續出現在社群動態中。</p>
+                <p><strong>影響：</strong>熱度不只來自官方活動，也仰賴玩家自發內容與社群關係網的延伸。</p>
+              </div>
+            </button>
+          </div>
+        </section>
+      </section>
+
+      <section class="story-section">
         <article class="article-card">
           <h2>低壓、可愛與每日回顧：玩家留下來的原因</h2>
           <div class="article-content">
             <p>除了社群推力，皮克敏本身低壓、可愛且貼近日常的遊戲設計，也是吸引玩家持續留下的原因。就讀國立台灣師範大學的黃奕晨表示，自己一開始是因為想與身邊朋友有共同話題，但後來發現皮克敏最吸引人的，是玩家可以自由決定遊玩時間。黃奕晨說：「我在玩皮克敏時不會被遊戲綁住，而且過程中不會有廣告干擾，更是吸引我一直玩下去的原因。」</p>
             <p>而對喜歡記錄生活的玩家而言，皮克敏提供了一種新的日常紀錄方式。遊戲中的「每日回顧」功能，會在每晚統整玩家當日步數、移動軌跡、種花成果與當日心情，並建立在生活記錄中加入照片的功能，替玩家的一天留下簡短生活日誌。資深玩家盧莉恩也分享說：「當初會開始玩這個遊戲，是因為我去年到日本交換，想要記錄自己去過哪些地方，而皮克敏能記錄我當天所拍下的照片。」</p>
+
+            <section class="news-tool daily-review-tool">
+              <div class="daily-review-phone">
+                <div class="daily-phone-frame">
+                  <div class="daily-game-photo-slot">
+                    <img src="image/daily-review-screenshot.png" alt="" onerror="this.style.display='none'">
+                  </div>
+                </div>
+              </div>
+
+              <div class="daily-review-copy">
+                <span class="tool-kicker">Daily Lookback</span>
+                <h3>每日回顧讓遊戲變成生活索引</h3>
+                <p>對玩家而言，每日回顧不只是遊戲結算畫面，而是把步數、路線、照片與心情整理成一份可回看的生活紀錄。</p>
+              </div>
+            </section>
             <p>對此，吹著魔笛的浮士德指出，皮克敏與傳統 LBS 遊戲（註三）的關鍵差異，在於其促進了跨越國界與地域的文化互換。各地區審美的異質性誘發全球用戶跨域交流，例如在台灣司空見慣的變電箱，在日本玩家眼中卻成了充滿異國情調的風景。像玩家小周，他便曾為了特定縣市的美景明信片，在週末展開一場說走就走的蒐集之旅。吹著魔笛的浮士德說：「這就是走路遊戲有趣的地方，它會帶你去可能這輩子都不會走進的巷子，帶領用戶發現世界可愛、有趣的角落。」</p>
             <p class="article-note">註三：LBS遊戲，Location-Based Service，適地性服務遊戲，為結合 GPS 定位與現實地圖的虛擬遊戲。</p>
           </div>
@@ -1955,11 +3746,19 @@
       </section>
 
       <section id="players-discussion-section" class="story-section">
-        <div class="section-head"><h2>皮友群聊：遊戲裡的彩蛋，怎麼改變真實生活？</h2><p>小周、木星小傘、吹著魔笛的浮士德、張馨予、盧莉恩、黃奕晨、陳冠賓和你的皮克敏，一起聊聊入坑、紀錄、移動與文化交換。</p></div>
-        <div class="chat-card group-chat-card" id="group-chat-card">
-          <div class="chat-header"><img class="chat-avatar story-guide-img" src="images/guide-red.png" alt="你的皮克敏"><div><div class="chat-name">皮友群聊</div><div class="chat-status">遊戲中的隱藏彩蛋與生活如何被改變</div><div class="member-chip-row"><span class="member-chip">小周</span><span class="member-chip">木星小傘</span><span class="member-chip">吹著魔笛的浮士德</span><span class="member-chip">張馨予</span><span class="member-chip">盧莉恩</span><span class="member-chip">黃奕晨</span><span class="member-chip">陳冠賓</span><span class="member-chip">你的皮克敏</span><span class="member-chip">你</span></div></div></div>
-          <div class="chat-log" id="group-chat-log"></div>
-          <div class="chat-options" id="group-chat-options"></div>
+        <div class="section-head">
+          <h2>皮友群聊：遊戲裡的彩蛋，怎麼改變真實生活？</h2>
+          <p>把受訪者經驗整理成三個主題，看看 Pikmin Bloom 如何從遊戲延伸到日常生活。</p>
+        </div>
+
+        <div class="news-tool group-chat-tool" id="group-chat-card">
+          <div class="group-tabs" id="group-tabs">
+            <button class="group-tab active" type="button" data-topic="join">入坑原因</button>
+            <button class="group-tab" type="button" data-topic="habit">生活習慣改變</button>
+            <button class="group-tab" type="button" data-topic="social">社交與明信片交換</button>
+          </div>
+
+          <div class="group-topic-panel" id="group-topic-panel"></div>
         </div>
       </section>
 
@@ -1973,9 +3772,60 @@
           </div>
         </article>
       </section>
-      <section class="chat-scene chat-after-article" data-scene-id="chapter3-combo"></section>
+      <section class="story-section">
+        <section class="news-tool impact-map">
+          <div class="tool-header">
+            <span class="tool-kicker">Impact Map</span>
+            <h3>Pikmin 如何改變玩家生活？</h3>
+            <p>點擊四個面向，查看受訪者例子與報導觀察。</p>
+          </div>
 
-      <section class="chat-scene" data-scene-id="chapter4-combo"></section>
+          <div class="impact-grid">
+            <div class="impact-card active" data-impact="move" tabindex="0" role="button">
+              <h4>移動</h4>
+              <p>玩家可能選擇多走路、改變路線，甚至學習騎車提升效率。</p>
+              <div class="impact-detail">
+                <p><strong>受訪者例子：</strong>鍾佳俊會為了達成每日任務指標，刻意增加日常步行里程；木星小傘也發現每日步數比以前平均增加約 2000 步。</p>
+                <p><strong>影響說明：</strong>遊戲把「多走一點」轉化為任務進度，讓玩家願意改變原本的移動選擇。</p>
+                <p><strong>報導觀察：</strong>當路線開始被任務牽動，城市就不再只是通勤背景，而成為遊戲地圖。</p>
+              </div>
+            </div>
+            <div class="impact-card" data-impact="time" tabindex="0" role="button">
+              <h4>時間</h4>
+              <p>每日任務與活動任務讓玩家開始安排進度。</p>
+              <div class="impact-detail">
+                <p><strong>受訪者例子：</strong>張馨予會為每月活動任務設定進度表，希望在每月 15 日前完成任務。</p>
+                <p><strong>影響說明：</strong>遊戲任務讓玩家把活動期限、每日目標與行動安排放進生活規劃。</p>
+                <p><strong>報導觀察：</strong>遊戲不只填補零碎時間，也開始重新安排玩家的日常節奏。</p>
+              </div>
+            </div>
+            <div class="impact-card" data-impact="mood" tabindex="0" role="button">
+              <h4>情緒</h4>
+              <p>任務受阻、資源不足或錯過進度時，遊戲也可能帶來焦慮。</p>
+              <div class="impact-detail">
+                <p><strong>受訪者例子：</strong>張馨予提到，如果忘記帶行動電源，會因為種花時間受限而感到自責與焦慮。</p>
+                <p><strong>影響說明：</strong>當任務進度與資源消耗綁在一起，遊戲回饋也可能轉化為壓力來源。</p>
+                <p><strong>報導觀察：</strong>低壓遊戲並不代表完全沒有制約，關鍵在於玩家投入程度與自我界線。</p>
+              </div>
+            </div>
+            <div class="impact-card" data-impact="social" tabindex="0" role="button">
+              <h4>社交</h4>
+              <p>打蘑菇、明信片交換與 Party Walk 成為低負擔的人際連結方式。</p>
+              <div class="impact-detail">
+                <p><strong>受訪者例子：</strong>陳冠賓認為交換明信片逐漸成為日常問候；鍾佳俊則會透過打蘑菇邀請維繫跨城市友誼。</p>
+                <p><strong>影響說明：</strong>明信片、打蘑菇與 Party Walk 讓玩家用低負擔方式維持互動。</p>
+                <p><strong>報導觀察：</strong>皮克敏的社交不是強迫聊天，而是讓共同任務成為新的關係媒介。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pikmin-hint-card pikmin-companion">
+            <img class="story-guide-img" src="image/guide-red.png" alt="">
+            <p><strong>皮克敏小筆記：</strong>當玩家開始為了任務改變路線，遊戲就不只是娛樂，而是影響生活節奏。</p>
+          </div>
+        </section>
+      </section>
+
       <section class="story-section">
         <article class="article-card">
           <h2>現實生活的 Party walk　推動新型態社交網絡</h2>
@@ -1984,18 +3834,50 @@
             <p>「我覺得很多人是為了社群接觸皮克敏，也為了跟朋友交換明信片。」2025 年暑假投入皮克敏的玩家陳冠賓指出，皮克敏「交換明信片」逐漸成為一種日常問候方式，拉近了玩家之間的距離，更顯示這股橫掃社群的風潮核心在於渴望具備共鳴的社交連結。他分享，他與友人時常相約騎車漫遊社區，一起開啟種花功能，將原本僅限於螢幕中的散步遊戲，延伸至與同伴並肩同行的實體行動。同樣沉浸於遊戲的玩家鍾佳俊則分享，皮克敏在一定程度上消弭了地理隔閡。每當好友發出「打蘑菇」的邀請，他總會第一時間加入，這樣的互動不僅維繫了跨城市的友誼，也讓他在校園中結識更多志同道合的朋友。</p>
             <p>對於這樣的社交影響，林日璇形容遊戲為一種「社交潤滑劑」，「即使不強調即時對話，透過共同任務等方式，仍能加強玩家之間的連結。」他表示，這類低負擔的互動形式，使遊戲成為人際關係中的另一種交流媒介。吹著魔笛的浮士德亦觀察到，皮克敏不僅促進玩家之間的互動，也對家人關係產生影響，長輩與在外發展的子女之間，不再僅止於關心近況，而是能透過打蘑菇或寄送明信片等方式，延伸互動與對話內容。</p>
             <p>從通勤路上的一步一花，到與朋友家人共享的明信片互動，皮克敏重新定義我們觀看日常生活的視角。當這群小生物跳出螢幕，娛樂與生活的邊界隨之消融。皮克敏的火紅或許正說明，人們不再只是在生活中尋找娛樂，而是在娛樂之中，重新理解生活。</p>
+            <div class="article-credit-block article-credit-centered">
+              <div class="article-credit-grid">
+                <div class="article-credit-col">
+                  <div class="article-credit-item">
+                    <div class="article-credit-label">採訪撰稿</div>
+                    <div class="article-credit-value">蔡孟安、李若水、劉倚瑄</div>
+                  </div>
+                  <div class="article-credit-item">
+                    <div class="article-credit-label">網頁製作</div>
+                    <div class="article-credit-value">劉倚瑄</div>
+                  </div>
+                </div>
+
+                <div class="article-credit-col">
+                  <div class="article-credit-item">
+                    <div class="article-credit-label">插畫設計</div>
+                    <div class="article-credit-value">劉倚瑄</div>
+                  </div>
+                  <div class="article-credit-item">
+                    <div class="article-credit-label">發布日期</div>
+                    <div class="article-credit-value">2026 年 4 月 30 日</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="article-credit-divider"></div>
+
+              <div class="article-share-row centered-share-row">
+                <button class="article-share-btn" type="button" id="share-facebook-btn">分享至 Facebook</button>
+                <button class="article-share-btn" type="button" id="share-line-btn">分享至 LINE</button>
+                <button class="article-share-btn" type="button" id="copy-link-btn">複製連結</button>
+              </div>
+
+              <button class="article-back-to-top centered-back-to-top" type="button" id="back-to-top-btn">↑ 回到頂部</button>
+
+              <div class="article-copyright centered-copyright">
+                © 2026 政治大學大學報專題報導 · 保留所有權利
+              </div>
+            </div>
           </div>
         </article>
       </section>
-
-      <section id="ending-animation-section" class="story-section"><div class="ending-card"><h2 id="ending-title">皮克敏正在回來的路上……</h2><p id="ending-copy">牠會帶回什麼，取決於你們今天累積的友好度。</p><div class="ending-video-wrap" id="ending-video-wrap"><video id="ending-video" autoplay muted loop playsinline preload="auto"></video><div class="ending-placeholder" id="ending-placeholder">影片預留位置</div></div><div class="ending-actions"><button class="btn btn-primary" id="confirm-receive-btn" type="button">確認接收</button></div></div></section>
-      <section id="friendship-gift-section" class="story-section is-hidden"><div class="gift-grid interactive-card gift-reveal-card"><div><img class="gift-pikmin-img" id="gift-img" src="images/gift-red.png" alt="皮克敏拿禮物"><div class="gift-visuals"><img class="gift-small-img" id="decor-img" src="images/decor-red.png" alt="飾品"><img class="gift-small-img gift-postcard-img" id="postcard-img" src="images/postcard-red.png" alt="明信片"></div></div><div><h2 id="gift-title">你的皮克敏帶回了一張明信片。</h2><p id="gift-subtitle">也許再多互動一點，牠下次會穿上新飾品回來。</p><div class="heart-row" id="heart-row"><span>❤</span><span>❤</span><span>❤</span><span>❤</span></div><div class="gift-items"><div class="gift-item" id="decor-item"><strong>飾品：</strong><span id="gift-decor">紅色紙花飾品</span></div><div class="gift-item"><strong>明信片：</strong><span id="gift-postcard">熱鬧街角明信片</span></div><div class="gift-item" id="message-item"><strong>留言：</strong><span id="gift-message">謝謝你今天也勇敢往前走。</span></div></div></div></div></section>
-      <section id="daily-review-section" class="story-section"><div class="review-card"><div class="section-head"><h2>今日回顧</h2><p>讀完這段和皮克敏一起走過的路，你現在的心情是？</p></div><div class="mood-grid" id="mood-grid"><button class="mood-card" type="button" data-mood="開心" data-points="4" data-reply="我也很開心，今天的路變得不一樣了。"><img src="images/mood-happy.png" alt="開心"><h3>開心</h3><p>原來走路也可以變成一件可愛的事。</p></button><button class="mood-card" type="button" data-mood="驚訝" data-points="4" data-reply="很多改變都是走著走著才發現的。"><img src="images/mood-surprised.png" alt="驚訝"><h3>驚訝</h3><p>沒想到一款遊戲能這樣改變生活路線。</p></button><button class="mood-card" type="button" data-mood="反思" data-points="4" data-reply="也許這就是皮克敏最像生活的地方。"><img src="images/mood-reflective.png" alt="反思"><h3>反思</h3><p>遊戲與日常的界線，好像比想像中更模糊。</p></button></div><div class="pikmin-reply mood-response" id="mood-response"></div></div></section>
-      <section id="pikmin-diary-section" class="story-section"><div class="diary-card"><h2>你的專屬皮克敏日記</h2><textarea class="diary-input" id="diary-input" placeholder="寫下你今天的回顧，或留一句話給作者……"></textarea><button class="btn btn-primary" id="generate-diary-btn" type="button">生成我的皮克敏日記</button><div class="diary-output" id="diary-output"><div id="diary-share-card" class="diary-share-card"><div class="diary-share-left"><div class="diary-share-meta" id="diary-date"></div><h3 id="diary-title">紅色皮克敏的今日回顧</h3><div class="diary-share-meta"><strong>今日心情：</strong><span id="diary-mood">尚未選擇</span></div><div class="diary-share-text" id="diary-text"></div><p>今天也辛苦了，明天繼續一起走吧。</p></div><div class="diary-share-postcard"><img id="diary-postcard-img" src="images/postcard-red.png" alt="今日明信片"><div><strong>今日明信片：</strong><span id="diary-postcard">熱鬧街角明信片</span></div></div></div><div class="diary-action-row"><button class="btn btn-primary" id="save-diary-card-btn" type="button">儲存卡片</button><button class="btn btn-ghost" id="share-site-btn" type="button">分享報導網站</button><button class="btn btn-ghost" id="copy-diary-btn" type="button">複製日記文字</button></div><div class="save-status" id="save-status"></div></div></div></section>
     </main>
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script>
     (() => {
       const baseScores = () => ({
@@ -2712,8 +4594,6 @@
           interactedKeys.add(key);
         }
         friendshipScore = Math.min(MAX_FRIENDSHIP, friendshipScore + n);
-        renderEndingAnimation();
-        renderFriendshipGift();
       }
 
       function getHeartCount() {
@@ -2781,7 +4661,7 @@
         sceneEl.innerHTML = `
           <div class="chat-card">
             <div class="chat-header">
-              <img class="chat-avatar story-guide-img" src="images/guide-${getCurrentResultKey()}.png" alt="你的皮克敏">
+              <img class="chat-avatar story-guide-img" src="image/guide-${getCurrentResultKey()}.png" alt="">
               <div><div class="chat-name">你的皮克敏</div><div class="chat-status">正在陪你回顧今天</div></div>
             </div>
             <div class="chat-log"></div>
@@ -2825,17 +4705,78 @@
         }, 320);
       }
 
-      function initChatScenes() { document.querySelectorAll(".chat-scene").forEach(setupChatScene); }
+      function initChatScenes() {
+        document.querySelectorAll(".chat-scene[data-enable-chat='true']").forEach(setupChatScene);
+      }
+
+
+      const groupChatTopics = {
+        join: [
+          {
+            speaker: "木星小傘",
+            text: "我是看到 Threads 上有人說，派皮克敏出國拿禮物要 100 天，才開始好奇。"
+          },
+          {
+            speaker: "黃奕晨",
+            text: "我一開始是因為朋友都在玩，想要有共同話題。"
+          },
+          {
+            speaker: "吹著魔笛的浮士德",
+            text: "玩家自發分享與社群演算法推送，讓皮克敏更容易被大眾看見。"
+          }
+        ],
+        habit: [
+          {
+            speaker: "張馨予",
+            text: "為了提升遊戲進度，我學會騎腳踏車，因為騎腳踏車種花速度會變快。"
+          },
+          {
+            speaker: "木星小傘",
+            text: "開始玩之後，我每日行走的步數比以前平均增加約 2000 步。"
+          },
+          {
+            speaker: "林日璇",
+            text: "與其說是影響生活，不如說是增加玩家日常行動的動機。"
+          }
+        ],
+        social: [
+          {
+            speaker: "陳冠賓",
+            text: "我覺得很多人是為了社群接觸皮克敏，也為了跟朋友交換明信片。"
+          },
+          {
+            speaker: "鍾佳俊",
+            text: "每當好友發出打蘑菇邀請，我總會第一時間加入，也因此維繫跨城市友誼。"
+          },
+          {
+            speaker: "吹著魔笛的浮士德",
+            text: "不同地區的明信片會誘發玩家跨域交流，讓城市風景成為可以交換的文化經驗。"
+          }
+        ]
+      };
+
+      function renderGroupTopic(topic = "join") {
+        const panel = document.getElementById("group-topic-panel");
+        if (!panel) return;
+        const items = groupChatTopics[topic] || groupChatTopics.join;
+        panel.innerHTML = items.map(item => `
+          <div class="group-message">
+            <strong>${item.speaker}</strong>
+            <p>${item.text}</p>
+          </div>
+        `).join("");
+      }
 
       function setupGroupChat() {
-        const log = document.getElementById("group-chat-log");
-        const opts = document.getElementById("group-chat-options");
-        if (!log || !opts) return;
-        log.innerHTML = "";
-        opts.innerHTML = "";
-        opts.classList.add("hide");
-        document.getElementById("group-chat-card").dataset.round = "0";
-        showGroupRound(0);
+        renderGroupTopic("join");
+
+        document.querySelectorAll(".group-tab").forEach(btn => {
+          btn.addEventListener("click", () => {
+            document.querySelectorAll(".group-tab").forEach(tab => tab.classList.remove("active"));
+            btn.classList.add("active");
+            renderGroupTopic(btn.dataset.topic);
+          });
+        });
       }
 
       function showGroupRound(roundIndex) {
@@ -2871,54 +4812,11 @@
       }
 
       function renderFriendshipGift() {
-        const key = getCurrentResultKey();
-        const gift = giftMap[key] || giftMap.red;
-        const heartCount = getHeartCount();
-        document.querySelectorAll("#heart-row span").forEach((heart, i) => heart.classList.toggle("filled", i < heartCount));
-        const full = hasFullFriendship();
-        const setText = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
-        setText("gift-title", full ? "你的皮克敏友好度達到 4 顆愛心！" : `你的皮克敏友好度達到 ${heartCount} 顆愛心。`);
-        setText("gift-subtitle", full ? "牠穿上新飾品，並帶回一張明信片給你。" : "這次牠先帶回一張明信片，也許下次會穿上新飾品回來。");
-        setText("gift-decor", gift.decor);
-        setText("gift-postcard", gift.postcard);
-        setText("gift-message", gift.message);
-        const giftImg = document.getElementById("gift-img");
-        const decorImg = document.getElementById("decor-img");
-        if (full) {
-          setImgSafe(giftImg, `images/decor-wearing-${key}.png`, `${profiles[key].name}穿戴飾品`);
-          if (giftImg) giftImg.classList.add("reveal-wearing");
-        }
-        if (giftImg) giftImg.classList.toggle("is-hidden", !full);
-        if (decorImg) decorImg.classList.add("is-hidden");
-        const decorItem = document.getElementById("decor-item");
-        if (decorItem) decorItem.classList.add("is-hidden");
-        const messageItem = document.getElementById("message-item");
-        if (messageItem) messageItem.classList.toggle("is-hidden", !full);
-        setImgSafe(document.getElementById("postcard-img"), `images/postcard-${key}.png`, gift.postcard);
+        // 結尾禮物互動已移除，保留空函式避免舊流程呼叫時出錯。
       }
 
       function renderEndingAnimation() {
-        const key = getCurrentResultKey();
-        const full = hasFullFriendship();
-        const video = document.getElementById("ending-video");
-        const placeholder = document.getElementById("ending-placeholder");
-        const title = document.getElementById("ending-title");
-        const copy = document.getElementById("ending-copy");
-        const confirm = document.getElementById("confirm-receive-btn");
-        if (title) title.textContent = full ? "友好度達成！皮克敏帶著禮物回來了" : "恭喜閱讀完報導！皮克敏帶回了明信片";
-        if (copy) copy.textContent = full ? "牠穿上新飾品，帶回今天走過的路。" : "這次先收到明信片，也許下次會有新的飾品。";
-        if (confirm) confirm.textContent = full ? "確認接收禮物" : "確認接收明信片";
-        if (!video) return;
-        const src = full ? `video/gift-ending-${key}.mp4` : `video/postcard-ending-${key}.mp4`;
-        video.innerHTML = `<source src="${src}" type="video/mp4">`;
-        video.load();
-        video.style.display = "block";
-        if (placeholder) placeholder.style.display = "none";
-        video.onerror = () => {
-          video.style.display = "none";
-          if (placeholder) { placeholder.style.display = "block"; placeholder.textContent = `${src} 影片預留位置`; }
-        };
-        video.play().catch(() => {});
+        // 結尾動畫互動已移除，保留空函式避免舊流程呼叫時出錯。
       }
 
       function updateStoryByResult(key) {
@@ -2929,19 +4827,10 @@
         const gift = giftMap[key] || giftMap.red;
         document.querySelectorAll(".story-pikmin-name").forEach(el => el.textContent = p.name);
         document.querySelectorAll(".story-guide-img").forEach(el => setImgSafe(el, `images/guide-${key}.png`, p.name));
-        setImgSafe(document.getElementById("sign-result"), `images/sign-${key}.png`, p.name);
-        setImgSafe(document.getElementById("sign-best"), `images/sign-${bestKey}.png`, profiles[bestKey].name);
-        setImgSafe(document.getElementById("sign-comp"), `images/sign-${compKey}.png`, profiles[compKey].name);
-        setImgSafe(document.getElementById("postcard-img"), `images/postcard-${key}.png`, gift.postcard);
-        setImgSafe(document.getElementById("diary-postcard-img"), `images/postcard-${key}.png`, gift.postcard);
-        const setText = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
-        setText("gift-decor", gift.decor);
-        setText("gift-postcard", gift.postcard);
-        setText("gift-message", gift.message);
-        setText("diary-title", `${p.name}的今日回顧`);
-        setText("diary-postcard", gift.postcard);
-        renderFriendshipGift();
-        renderEndingAnimation();
+        setImgSafe(document.getElementById("sign-result"), `image/sign-${key}.png`, p.name);
+        setImgSafe(document.getElementById("sign-best"), `image/sign-${bestKey}.png`, profiles[bestKey].name);
+        setImgSafe(document.getElementById("sign-comp"), `image/sign-${compKey}.png`, profiles[compKey].name);
+        // 結尾禮物與日記功能已移除，正文中的皮克敏圖片仍會依測驗結果更新。
       }
 
       function appendPhoneBubble(type, text, typed=false, callback) {
@@ -2987,23 +4876,27 @@
         updateStoryByResult(key);
         document.body.classList.remove("quiz-started");
         document.body.classList.add("story-started");
-        document.body.classList.remove("story-reading");
-        document.getElementById("friendship-gift-section")?.classList.add("is-hidden");
-        document.querySelectorAll(".mood-card").forEach(el => el.classList.remove("selected"));
-        document.getElementById("mood-response")?.classList.remove("show");
+        document.body.classList.remove("story-reading", "reading-mode");
         initChatScenes();
         setupGroupChat();
         document.getElementById("phone-notification-scene")?.scrollIntoView({behavior:"smooth", block:"start"});
         startPhoneSequence();
       }
 
+
+      const readingModeToggle = document.getElementById("reading-mode-toggle");
+      readingModeToggle?.addEventListener("click", () => {
+        const enabled = document.body.classList.toggle("reading-mode");
+        readingModeToggle.textContent = enabled ? "恢復皮克敏陪讀" : "減少互動，專心閱讀";
+      });
+
       document.getElementById("opening-start-btn")?.addEventListener("click", () => {
         document.body.classList.add("quiz-started");
-        document.body.classList.remove("story-started", "story-reading");
+        document.body.classList.remove("story-started", "story-reading", "reading-mode");
         show("intro");
       });
 
-      document.querySelectorAll(".flip-card").forEach(card => {
+      document.querySelectorAll(".flip-card:not(.compare-flip-card)").forEach(card => {
         card.addEventListener("click", () => card.classList.toggle("flipped"));
         card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); card.classList.toggle("flipped"); } });
       });
@@ -3028,70 +4921,171 @@
         });
       });
 
-      document.getElementById("confirm-receive-btn")?.addEventListener("click", () => {
-        renderFriendshipGift();
-        const giftSection = document.getElementById("friendship-gift-section");
-        giftSection?.classList.remove("is-hidden");
-        giftSection?.scrollIntoView({behavior:"smooth", block:"start"});
-      });
 
-      document.querySelectorAll(".mood-card").forEach(card => {
-        card.addEventListener("click", () => {
-          document.querySelectorAll(".mood-card").forEach(c => c.classList.remove("selected"));
-          card.classList.add("selected");
-          selectedMood = card.dataset.mood || "";
-          addFriendship(card.dataset.points, "mood-selected");
-          const moodResponse = document.getElementById("mood-response");
-          if (moodResponse) { moodResponse.textContent = card.dataset.reply || ""; moodResponse.classList.add("show"); }
-        });
-      });
 
-      document.getElementById("generate-diary-btn")?.addEventListener("click", () => {
-        const key = getCurrentResultKey();
-        const p = profiles[key];
-        const gift = giftMap[key] || giftMap.red;
-        const input = document.getElementById("diary-input").value.trim() || "今天讀完這篇報導，我想把這段路記下來。";
-        const date = new Date().toLocaleDateString("zh-TW", {year:"numeric", month:"long", day:"numeric"});
-        document.getElementById("diary-date").textContent = date;
-        document.getElementById("diary-title").textContent = `${p.name}的今日回顧`;
-        document.getElementById("diary-postcard").textContent = gift.postcard;
-        document.getElementById("diary-mood").textContent = selectedMood || "尚未選擇";
-        document.getElementById("diary-text").textContent = input;
-        setImgSafe(document.getElementById("diary-postcard-img"), `images/postcard-${key}.png`, gift.postcard);
-        const out = document.getElementById("diary-output");
-        out.classList.add("show");
-        out.scrollIntoView({behavior:"smooth", block:"center"});
-      });
 
-      document.getElementById("copy-diary-btn")?.addEventListener("click", async () => {
-        const text = document.getElementById("diary-share-card")?.innerText || document.getElementById("diary-output")?.innerText || "";
-        try { await navigator.clipboard.writeText(text); document.getElementById("copy-diary-btn").textContent = "已複製日記文字"; }
-        catch(e) { document.getElementById("copy-diary-btn").textContent = "複製失敗，請手動複製"; }
-      });
 
-      document.getElementById("share-site-btn")?.addEventListener("click", async () => {
-        const btn = document.getElementById("share-site-btn");
-        try {
-          if (navigator.share) await navigator.share({ title: document.title, text: "我剛完成皮克敏與城市日常的互動報導，這是我的皮克敏日記！", url: location.href });
-          else { await navigator.clipboard.writeText(location.href); btn.textContent = "已複製報導連結"; }
-        } catch(e) {}
-      });
 
-      document.getElementById("save-diary-card-btn")?.addEventListener("click", async () => {
-        const status = document.getElementById("save-status");
-        const card = document.getElementById("diary-share-card");
-        if (!window.html2canvas || !card) { if (status) status.textContent = "目前無法儲存圖片，請改用截圖。"; return; }
-        try {
-          const canvas = await html2canvas(card, {backgroundColor: null, scale: 2, useCORS: true});
-          const link = document.createElement("a");
-          link.download = "diary-card.png";
-          link.href = canvas.toDataURL("image/png");
-          link.click();
-          if (status) status.textContent = "已產生日記卡圖片。";
-        } catch(e) {
-          if (status) status.textContent = "目前無法儲存圖片，請改用截圖。";
+
+
+
+      const mechanicDetails = {
+        walk: {
+          title: "走路累積步數",
+          text: "通勤、散步、繞路都會被轉換成遊戲進度，讓原本普通的移動變成可以被累積的成果。",
+          impact: "玩家更容易為了完成步數或活動任務，主動改變路線。"
+        },
+        flower: {
+          title: "種花",
+          text: "種花會把現實路線變成地圖上的花路，也會帶來金幣、任務進度與視覺回饋。",
+          impact: "玩家可能為了種更多花，選擇多走一段路或調整交通方式。"
+        },
+        mushroom: {
+          title: "打蘑菇",
+          text: "玩家可以派出皮克敏挑戰蘑菇，並邀請朋友一起加入，完成後取得道具與明信片。",
+          impact: "遊戲不只是個人散步，也變成低負擔的社交互動。"
+        },
+        decor: {
+          title: "飾品蒐集",
+          text: "車站、餐廳、公園等地點可能產生不同飾品皮克敏，讓玩家像抽盲盒一樣期待下一個結果。",
+          impact: "城市中的地點開始變成可蒐集、可探索的線索。"
+        },
+        lookback: {
+          title: "每日回顧",
+          text: "每日回顧把玩家一天的移動與照片整理成生活紀錄，讓遊戲成為日常索引。",
+          impact: "玩家不只是完成任務，也能回頭觀看自己如何度過一天。"
         }
-      });
+      };
+
+      function setupMechanicsTool() {
+        const cards = document.querySelectorAll(".mechanic-card");
+        const title = document.getElementById("mechanic-detail-title");
+        const text = document.getElementById("mechanic-detail-text");
+        const impact = document.getElementById("mechanic-detail-impact");
+        if (!cards.length || !title || !text || !impact) return;
+        const activate = key => {
+          const data = mechanicDetails[key] || mechanicDetails.walk;
+          cards.forEach(card => card.classList.toggle("active", card.dataset.mechanic === key));
+          title.textContent = data.title;
+          text.textContent = data.text;
+          impact.textContent = data.impact;
+        };
+        cards.forEach(card => card.addEventListener("click", () => activate(card.dataset.mechanic)));
+        activate("walk");
+      }
+
+      const timelineDetails = {
+        launch: {
+          title: "2021 年：Pikmin Bloom 上線",
+          text: "Pikmin Bloom 上線，主打走路、種花與日常紀錄，讓定位遊戲不只停留在捕捉或戰鬥，也開始連結生活軌跡。",
+          impact: "建立低壓、日常型走路遊戲的基本玩法。"
+        },
+        before: {
+          title: "2025 年 8 月前：下載排名約落在百名左右",
+          text: "在爆紅前，皮克敏的下載排名大多落在百名左右，玩家圈仍相對集中。",
+          impact: "這段低基期讓後續排名上升更明顯，也凸顯社群擴散的效果。"
+        },
+        kaohsiung: {
+          title: "高雄合作活動後：排名逐漸上升",
+          text: "地方合作活動讓更多玩家注意到遊戲，也讓社群平台上的討論逐漸增加。",
+          impact: "地方活動先把玩家討論升溫，成為後續社群爆發的前置節點。"
+        },
+        leka: {
+          title: "樂咖 IG 影片爆紅",
+          text: "喜劇演員樂咖在 Instagram 發布皮克敏重度玩家相關影片，觀看數超過 300 萬，讓原本較小眾的玩家經驗被推到更大的社群視野。",
+          impact: "影片把「皮克敏玩家到底在忙什麼」轉化成大眾可理解、可轉傳的社群內容，成為爆紅關鍵轉折。"
+        },
+        anniversary: {
+          title: "2025 年 11 月：四週年活動",
+          text: "四週年活動期間，單月新增下載量達 66.7 萬，成為遊戲上線後的重要成長節點。",
+          impact: "活動獎勵與社群討論相互推動，使既有玩家與新玩家同時被吸引。"
+        },
+        social: {
+          title: "社群擴散：Threads、攻略與明信片交換",
+          text: "玩家在 Threads 分享入坑原因、攻略、明信片與特殊飾品，讓遊戲內容持續出現在社群動態中。",
+          impact: "熱度不只來自官方活動，也仰賴玩家自發內容與社群關係網的延伸。"
+        }
+      };
+
+      function setupCompareFlipCards() {
+        document.querySelectorAll(".compare-flip-card").forEach(card => {
+          card.addEventListener("click", () => {
+            card.classList.toggle("is-flipped");
+          });
+        });
+      }
+
+      function setupTimelineTool() {
+        const items = document.querySelectorAll(".timeline-item");
+        if (!items.length) return;
+
+        items.forEach(item => {
+          item.addEventListener("click", () => {
+            items.forEach(i => i.classList.remove("active"));
+            item.classList.add("active");
+          });
+        });
+      }
+
+      function setupImpactCards() {
+        const cards = document.querySelectorAll(".impact-card");
+        if (!cards.length) return;
+
+        const activate = card => {
+          const isActive = card.classList.contains("active");
+          cards.forEach(c => c.classList.remove("active"));
+          if (!isActive) card.classList.add("active");
+        };
+
+        cards.forEach(card => {
+          card.addEventListener("click", () => activate(card));
+          card.addEventListener("keydown", e => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              activate(card);
+            }
+          });
+        });
+      }
+
+      function setupGlossaryCards() {
+        document.querySelectorAll(".glossary-card-item").forEach(card => {
+          card.addEventListener("click", () => {
+            card.classList.toggle("active");
+          });
+        });
+      }
+
+      function setupFooterActions() {
+        const url = () => encodeURIComponent(location.href);
+        document.getElementById("share-facebook-btn")?.addEventListener("click", () => {
+          window.open(`https://www.facebook.com/sharer/sharer.php?u=${url()}`, "_blank", "noopener,noreferrer");
+        });
+        document.getElementById("share-line-btn")?.addEventListener("click", () => {
+          window.open(`https://social-plugins.line.me/lineit/share?url=${url()}`, "_blank", "noopener,noreferrer");
+        });
+        document.getElementById("copy-link-btn")?.addEventListener("click", async e => {
+          const btn = e.currentTarget;
+          try {
+            await navigator.clipboard.writeText(location.href);
+            const original = btn.textContent;
+            btn.textContent = "已複製連結";
+            setTimeout(() => { btn.textContent = original; }, 1600);
+          } catch (err) {
+            btn.textContent = "複製失敗";
+          }
+        });
+        document.getElementById("back-to-top-btn")?.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
+
+      setupMechanicsTool();
+      setupCompareFlipCards();
+      setupTimelineTool();
+      setupImpactCards();
+      setupGlossaryCards();
+      setupFooterActions();
 
       $("start-btn").addEventListener("click", () => {
         playBgm();
@@ -3136,7 +5130,7 @@
 
         $("progress-fill").style.width = "0%";
         document.body.classList.add("quiz-started");
-        document.body.classList.remove("story-started", "story-reading");
+        document.body.classList.remove("story-started", "story-reading", "reading-mode");
 
         show("intro");
       });
